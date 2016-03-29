@@ -22,9 +22,20 @@ namespace CM3036_CW_1504693
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource dBStudentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("dBStudentViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // dBStudentViewSource.Source = [generic data source]
+        }
+
+
     }
 }
