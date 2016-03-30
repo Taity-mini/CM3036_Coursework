@@ -1,0 +1,8 @@
+﻿<Window x:Class="CM3036_CW_1504693.EditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EditDialog" Height="300" Width="300">
+    <Grid>
+        
+    </Grid>
+</Window>

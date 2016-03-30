@@ -20,9 +20,12 @@ namespace CM3036_CW_1504693
     /// Coursework for CM3036 | Programming in C#
     /// Author: Andrew Tait (1504693)
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
-
+        private DBStudent context;
+        private List<Student> Students;
+        private System.Windows.Data.CollectionViewSource StudentsViewSource;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,9 +34,20 @@ namespace CM3036_CW_1504693
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            System.Windows.Data.CollectionViewSource dBStudentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("dBStudentViewSource")));
+            StudentsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("dBStudentViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // dBStudentViewSource.Source = [generic data source]
+            context = new DBStudent();
+            //OnRefresh(sender, e);
+        }
+
+        private void OnRefresh(object sender, RoutedEventArgs e)
+        {
+            var query = from student in context.Students select student;
+            // convert set of Appointment objects to list of Appointment objects
+            Students = query.ToList();
+            // connect list of Appointment entities to collection view
+            StudentsViewSource.Source =  Students;
         }
 
 
