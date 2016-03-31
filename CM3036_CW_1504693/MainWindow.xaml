@@ -4,17 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:CM3036_CW_1504693" mc:Ignorable="d" x:Class="CM3036_CW_1504693.MainWindow"
         Title="CM3036 Coursework" Height="454" Width="637" Loaded="Window_Loaded">
     <Window.Resources>
-        <CollectionViewSource x:Key="dBStudentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:DBStudent}, CreateList=True}"/>
-        <CollectionViewSource x:Key="dBStudentStudentsViewSource" Source="{Binding Students, Source={StaticResource dBStudentViewSource}}"/>
+        <CollectionViewSource x:Key="studentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Student}, CreateList=True}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource dBStudentStudentsViewSource}">
+
+
+    <Grid DataContext="{StaticResource studentViewSource}">
         <Label Content="First Name:" HorizontalAlignment="Left" Margin="12,25,0,0" VerticalAlignment="Top" Width="92"/>
         <TextBox x:Name="firstName" HorizontalAlignment="Left" Height="23" Margin="151,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Last Name:" HorizontalAlignment="Left" Margin="12,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.211,0.115" Width="71"/>
         <TextBox x:Name="lastName" HorizontalAlignment="Left" Height="23" Margin="151,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Component 1" HorizontalAlignment="Left" Margin="318,21,0,0" VerticalAlignment="Top" Width="92"/>
-        <ComboBox x:Name="grade1" HorizontalAlignment="Left" Margin="446,25,0,0" VerticalAlignment="Top" Width="53">
-            <ComboBoxItem Content="A"/>
+        <ComboBox x:Name="grade1" HorizontalAlignment="Left" Margin="446,25,0,0" VerticalAlignment="Top" Width="53" SelectedIndex="0">
+            <ComboBoxItem Content="A" ContentStringFormat="A"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
             <ComboBoxItem Content="D"/>
@@ -22,8 +23,8 @@
             <ComboBoxItem Content="F"/>
         </ComboBox>
         <Label Content="Component 2&#xD;&#xA;" HorizontalAlignment="Left" Margin="318,66,0,0" VerticalAlignment="Top" Width="86" Height="26"/>
-        <ComboBox x:Name="grade2" HorizontalAlignment="Left" Margin="446,66,0,0" VerticalAlignment="Top" Width="53" RenderTransformOrigin="0.125,0.545">
-            <ComboBoxItem Content="A"/>
+        <ComboBox x:Name="grade2" HorizontalAlignment="Left" Margin="446,66,0,0" VerticalAlignment="Top" Width="53" RenderTransformOrigin="0.125,0.545" SelectedIndex="0">
+            <ComboBoxItem  Content="A"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
             <ComboBoxItem Content="D"/>
@@ -31,7 +32,7 @@
             <ComboBoxItem Content="F"/>
         </ComboBox>
         <Label Content="Component 3&#xD;&#xA;" HorizontalAlignment="Left" Margin="318,107,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="grade3" HorizontalAlignment="Left" Margin="445,111,0,0" VerticalAlignment="Top" Width="54">
+        <ComboBox x:Name="grade3" HorizontalAlignment="Left" Margin="445,111,0,0" VerticalAlignment="Top" Width="54" SelectedIndex="0">
             <ComboBoxItem Content="A"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
@@ -40,11 +41,11 @@
             <ComboBoxItem Content="F"/>
         </ComboBox>
         <Label x:Name="matriculation" Content="Matriculation Number:" HorizontalAlignment="Left" Margin="12,111,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.789,-0.038" Width="134"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="151,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="matriculationNo" HorizontalAlignment="Left" Height="23" Margin="151,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="121,270,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="addStudent" Content="Add Student" HorizontalAlignment="Left" Margin="261,154,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="-0.933,0.227"/>
-        <Button x:Name="RefreshList" Content="Refresh List" HorizontalAlignment="Left" Margin="8,195,0,0" VerticalAlignment="Top" Width="75" Click="OnRefresh"/>
-        <ListView x:Name="studentsListView" ItemsSource="{Binding}" Margin="1,222,0,2" SelectionMode="Single">
+        <Button x:Name="addStudent" Content="Add Student" HorizontalAlignment="Left" Margin="261,154,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="-0.933,0.227" Click="onAddStudent"/>
+        <Button x:Name="RefreshList" Content="Refresh List" HorizontalAlignment="Left" Margin="12,182,0,0" VerticalAlignment="Top" Width="75" Click="OnRefresh"/>
+        <ListView x:Name="studentListView" ItemsSource="{Binding}" Margin="4,214,0,10" SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -53,59 +54,58 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn x:Name="matricNumColumn" Header="Matriculation" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding matricNum, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="firstNameColumn" Header="First Name" Width="80">
+                    <GridViewColumn x:Name="firstNameColumn" Header="first Name" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Margin="6,-1,-6,-1" Text="{Binding firstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="lastNameColumn" Header="Last Name" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding lastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="gradeOneColumn" Header="Grade One" Width="80">
+                    <GridViewColumn x:Name="gradeOneColumn" Header="grade One" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Margin="-6,-1" Text="{Binding gradeOne, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="gradeTwoColumn" Header="Grade Two" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding gradeTwo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn x:Name="gradeThreeColumn" Header="Grade Three" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1" Text="{Binding gradeThree, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                  
-                    <GridViewColumn x:Name="gradeOverallColumn" Header="Grade Overall" Width="80">
+                    <GridViewColumn x:Name="gradeOverallColumn" Header="grade Overall" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Margin="-6,-1" Text="{Binding gradeOverall, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn x:Name="gradeThreeColumn" Header="grade Three" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding gradeThree, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="gradeTwoColumn" Header="grade Two" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding gradeTwo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="lastNameColumn" Header="last Name" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding lastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="matricNumColumn" Header="matric Num" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding matricNum, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+
     </Grid>
 </Window>
