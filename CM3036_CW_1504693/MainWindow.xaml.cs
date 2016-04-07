@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Data.Entity;
 
 namespace CM3036_CW_1504693
 {
@@ -91,7 +92,7 @@ namespace CM3036_CW_1504693
             students.gradeTwo = "B";
             students.gradeThree = "C";
             students.gradeOverall = studentOverallGrade;
-            //students.Id = 1;
+           
 
             context.Students.Add(students);
 
@@ -103,6 +104,31 @@ namespace CM3036_CW_1504693
 
             MessageBox.Show("Student Successfully Added!");
         }
+
+        //Editing Student Grades
+        private void OnEditStudent(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //Deleting Student details
+        private void OnDeleteStudent(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            Student student = (Student)button.DataContext;
+
+            var result = MessageBox.Show("Delete Student: " + student.matricNum + "?",  "Confirmation",
+                MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                context.Students.Remove(student);
+                context.SaveChanges();
+                OnRefresh(sender, e);
+            }
+        }
+
+
 
 
     }
