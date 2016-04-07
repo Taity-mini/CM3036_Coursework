@@ -74,11 +74,11 @@ namespace CM3036_CW_1504693
             Trace.WriteLine(studentGrade1);
             Trace.WriteLine(studentGrade2);
             Trace.WriteLine(studentGrade3);
-           
+
             string studentOverallGrade = "A"; //temp  for now..
             Student students = new Student();
             //Input validation will go here..
-           
+
 
             //Calculate Overall Grade
 
@@ -88,15 +88,15 @@ namespace CM3036_CW_1504693
             students.firstName = studentFirstName;
             students.lastName = studentLastName;
             students.matricNum = studentMatriculation;
-            students.gradeOne = "A";
-            students.gradeTwo = "B";
-            students.gradeThree = "C";
+            students.gradeOne = studentGrade1;
+            students.gradeTwo = studentGrade2;
+            students.gradeThree = studentGrade3;
             students.gradeOverall = studentOverallGrade;
-           
+
 
             context.Students.Add(students);
 
-           
+
 
             //Refresh the displayed list
             OnRefresh(sender, e);
@@ -108,8 +108,40 @@ namespace CM3036_CW_1504693
         //Editing Student Grades
         private void OnEditStudent(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
 
+            Student student = (Student)button.DataContext;
+
+            EditDialog dialog = new EditDialog(student.firstName, student.lastName, student.matricNum, student.gradeOne, student.gradeTwo, student.gradeThree);
+
+            Nullable<bool> result = dialog.ShowDialog();
+            if (dialog.DialogResult == true)
+            {
+
+                //Get updated fields from edit dialog
+                string firstName = dialog.firstName.Text;
+                string lastName = dialog.lastName.Text;
+                string matricNum = dialog.matriculation.Text;
+                string grade1 = dialog.Grade1.SelectionBoxItem.ToString();
+                string grade2 = dialog.Grade2.SelectionBoxItem.ToString();
+                string grade3 = dialog.Grade3.SelectionBoxItem.ToString();
+
+                //set updated fields into student record
+                student.firstName = firstName;
+                student.lastName = lastName;
+                student.matricNum = matricNum;
+                student.gradeOne = grade1;
+                student.gradeTwo = grade2;
+                student.gradeThree = grade3;
+
+                //update db with new details
+                context.SaveChanges();
+
+                //Refresh list on application
+                OnRefresh(sender, e);
+            }
         }
+
         //Deleting Student details
         private void OnDeleteStudent(object sender, RoutedEventArgs e)
         {
@@ -117,7 +149,7 @@ namespace CM3036_CW_1504693
 
             Student student = (Student)button.DataContext;
 
-            var result = MessageBox.Show("Delete Student: " + student.matricNum + "?",  "Confirmation",
+            var result = MessageBox.Show("Delete Student: " + student.matricNum + "?", "Confirmation",
                 MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.Yes)
@@ -129,7 +161,11 @@ namespace CM3036_CW_1504693
         }
 
 
+        //Delete all student records
+        private void onDeleteAllStudents(object sender, RoutedEventArgs e)
+        {
 
+        }
 
     }
 }
