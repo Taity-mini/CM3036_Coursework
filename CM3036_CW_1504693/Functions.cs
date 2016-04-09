@@ -148,7 +148,7 @@ namespace CM3036_CW_1504693
                     overallGrade = "C";
                 }
                 // Grade D
-                else if (gradeD >= 5 || gradeE >= 7)
+                else if (gradeD >= 5)
                 {
                     overallGrade = "D";
                 }

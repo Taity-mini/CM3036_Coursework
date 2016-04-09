@@ -29,7 +29,7 @@ namespace CM3036_CW_1504693
             lastName.Text = LastName;
             matriculation.Text = Matriculation;
 
-            Trace.WriteLine(grade1);
+            
             checkGrade(grade1, Grade1);
             checkGrade(grade2, Grade2);
             checkGrade(grade3, Grade3);
@@ -73,14 +73,12 @@ namespace CM3036_CW_1504693
             string studentLastName = lastName.Text;
             string studentMatriculation = matriculation.Text;
 
-            bool incomplete = false;
             //Input validation
+            bool incomplete = false;
             if (validation.isEmpty(studentFirstName) || validation.isEmpty(studentLastName) || validation.isEmpty(studentMatriculation))
             {
-
                 MessageBox.Show("Fields incomplete, try again!");
                 incomplete = true;
-
             }
             else if (incomplete == false)
             {

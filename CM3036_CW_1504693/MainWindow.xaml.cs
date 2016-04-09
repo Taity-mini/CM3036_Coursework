@@ -42,14 +42,7 @@ namespace CM3036_CW_1504693
 
             StudentsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("studentViewSource")));
             OnRefresh(sender, e);
-            // Load data by setting the CollectionViewSource.Source property:
-            // studentViewSource.Source = [generic data source]
-            System.Windows.Data.CollectionViewSource dBStudentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("dBStudentViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // dBStudentViewSource.Source = [generic data source]
-            System.Windows.Data.CollectionViewSource studentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("studentViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // studentViewSource.Source = [generic data source]
+           
         }
 
         private void OnRefresh(object sender, RoutedEventArgs e)
@@ -59,7 +52,29 @@ namespace CM3036_CW_1504693
             Students = query.ToList();
             // connect list of Appointment entities to collection view
             StudentsViewSource.Source = Students;
+
+
+            //Give each row a colour based on the student's overall change
+            foreach (Student item in studentDataGrid.ItemsSource)
+            {
+                var row = studentDataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+
+                //If they fail give them red
+                if (item.gradeOverall == "F" || item.gradeOverall == "E")
+                {
+                   // row.Background =  new SolidColorBrush(Colors.Red);
+                    
+                }
+
+                //Otherwise they passed and get green
+                else
+                {
+                    //row.Background =  FindResource("GreenBackgroundBrush") as Brush;
+                }
+            }
+
         }
+
 
         //Adding a student's grades to the database
         private void onAddStudent(object sender, RoutedEventArgs e)
@@ -69,7 +84,7 @@ namespace CM3036_CW_1504693
             string studentFirstName = firstName.Text;
             string studentLastName = lastName.Text;
             string studentMatriculation = matriculationNo.Text;
-            //Trace.WriteLine(grade1.SelectedValue.ToString());
+
             string studentGrade1 = grade1.SelectionBoxItem.ToString();
             string studentGrade2 = grade2.SelectionBoxItem.ToString();
             string studentGrade3 = grade3.SelectionBoxItem.ToString();
@@ -102,12 +117,10 @@ namespace CM3036_CW_1504693
                 students.gradeThree = studentGrade3;
                 students.gradeOverall = studentOverallGrade;
 
-
-                context.Students.Add(students);
-
                 //Refresh the displayed list
-                OnRefresh(sender, e);
+                context.Students.Add(students);
                 context.SaveChanges();
+                OnRefresh(sender, e);
 
                 //Clear fields to default
                 firstName.Clear();
@@ -117,6 +130,7 @@ namespace CM3036_CW_1504693
                 grade2.SelectedIndex = 0;
                 grade3.SelectedIndex = 0;
                 MessageBox.Show("Student Successfully Added!");
+
             }
         }
 
@@ -184,7 +198,7 @@ namespace CM3036_CW_1504693
         private void onDeleteAllStudents(object sender, RoutedEventArgs e)
         {
             //Check if database is not empty
-            if(Students.Count > 0)
+            if (Students.Count > 0)
             {
                 var result = MessageBox.Show("Delete all students (irreversible)?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
