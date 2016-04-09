@@ -66,9 +66,6 @@ namespace CM3036_CW_1504693
         {
 
             //Field variables
-
-
-
             string studentFirstName = firstName.Text;
             string studentLastName = lastName.Text;
             string studentMatriculation = matriculationNo.Text;
@@ -82,20 +79,19 @@ namespace CM3036_CW_1504693
 
             Functions validation = new Functions();
 
-            string studentOverallGrade = "A"; //temp  for now..
             Student students = new Student();
             bool incomplete = false;
             //Input validation will go here..
             if (validation.isEmpty(studentFirstName) || validation.isEmpty(studentLastName) || validation.isEmpty(studentMatriculation))
             {
-
                 MessageBox.Show("Fields incomplete, try again!");
                 incomplete = true;
-
             }
             else if (incomplete == false)
             {
+
                 //Calculate Overall Grade
+                string studentOverallGrade = validation.calculateGrade(studentGrade1, studentGrade2, studentGrade3);
 
                 //Add fields to database
                 students.firstName = studentFirstName;
@@ -120,12 +116,7 @@ namespace CM3036_CW_1504693
                 grade1.SelectedIndex = 0;
                 grade2.SelectedIndex = 0;
                 grade3.SelectedIndex = 0;
-
-
-
                 MessageBox.Show("Student Successfully Added!");
-
-
             }
         }
 
@@ -137,11 +128,10 @@ namespace CM3036_CW_1504693
             Student student = (Student)button.DataContext;
 
             EditDialog dialog = new EditDialog(student.firstName, student.lastName, student.matricNum, student.gradeOne, student.gradeTwo, student.gradeThree);
-
+            Functions grades = new Functions();
             Nullable<bool> result = dialog.ShowDialog();
             if (dialog.DialogResult == true)
             {
-
                 //Get updated fields from edit dialog
                 string firstName = dialog.firstName.Text;
                 string lastName = dialog.lastName.Text;
@@ -149,6 +139,7 @@ namespace CM3036_CW_1504693
                 string grade1 = dialog.Grade1.SelectionBoxItem.ToString();
                 string grade2 = dialog.Grade2.SelectionBoxItem.ToString();
                 string grade3 = dialog.Grade3.SelectionBoxItem.ToString();
+                string studentOverallGrade = grades.calculateGrade(grade1, grade2, grade3);
 
                 //set updated fields into student record
                 student.firstName = firstName;
@@ -157,10 +148,12 @@ namespace CM3036_CW_1504693
                 student.gradeOne = grade1;
                 student.gradeTwo = grade2;
                 student.gradeThree = grade3;
+                student.gradeOverall = studentOverallGrade;
 
                 //update db with new details
                 context.SaveChanges();
 
+                //Confirm student has updated
                 MessageBox.Show("Student Updated");
 
                 //Refresh list on application
@@ -190,10 +183,23 @@ namespace CM3036_CW_1504693
         //Delete all student records
         private void onDeleteAllStudents(object sender, RoutedEventArgs e)
         {
-
+            //Check if database is not empty
+            if(Students.Count > 0)
+            {
+                var result = MessageBox.Show("Delete all students (irreversible)?", "Confirmation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    //Delete all Students
+                    context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Students]");
+                    context.SaveChanges();
+                    OnRefresh(sender, e);
+                }
+            }
+            else //Otherwise display error message
+            {
+                MessageBox.Show("Can't delete from an empty database!");
+            }
         }
-
-
 
     }
 }
