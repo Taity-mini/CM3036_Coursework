@@ -31,6 +31,7 @@ namespace CM3036_CW_1504693
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -63,11 +64,15 @@ namespace CM3036_CW_1504693
         //Adding a student's grades to the database
         private void onAddStudent(object sender, RoutedEventArgs e)
         {
+
             //Field variables
+
+
+
             string studentFirstName = firstName.Text;
             string studentLastName = lastName.Text;
             string studentMatriculation = matriculationNo.Text;
-            Trace.WriteLine(grade1.SelectedValue.ToString());
+            //Trace.WriteLine(grade1.SelectedValue.ToString());
             string studentGrade1 = grade1.SelectionBoxItem.ToString();
             string studentGrade2 = grade2.SelectionBoxItem.ToString();
             string studentGrade3 = grade3.SelectionBoxItem.ToString();
@@ -75,34 +80,53 @@ namespace CM3036_CW_1504693
             Trace.WriteLine(studentGrade2);
             Trace.WriteLine(studentGrade3);
 
+            Functions validation = new Functions();
+
             string studentOverallGrade = "A"; //temp  for now..
             Student students = new Student();
+            bool incomplete = false;
             //Input validation will go here..
+            if (validation.isEmpty(studentFirstName) || validation.isEmpty(studentLastName) || validation.isEmpty(studentMatriculation))
+            {
+
+                MessageBox.Show("Fields incomplete, try again!");
+                incomplete = true;
+
+            }
+            else if (incomplete == false)
+            {
+                //Calculate Overall Grade
+
+                //Add fields to database
+                students.firstName = studentFirstName;
+                students.lastName = studentLastName;
+                students.matricNum = studentMatriculation;
+                students.gradeOne = studentGrade1;
+                students.gradeTwo = studentGrade2;
+                students.gradeThree = studentGrade3;
+                students.gradeOverall = studentOverallGrade;
 
 
-            //Calculate Overall Grade
+                context.Students.Add(students);
+
+                //Refresh the displayed list
+                OnRefresh(sender, e);
+                context.SaveChanges();
+
+                //Clear fields to default
+                firstName.Clear();
+                lastName.Clear();
+                matriculationNo.Clear();
+                grade1.SelectedIndex = 0;
+                grade2.SelectedIndex = 0;
+                grade3.SelectedIndex = 0;
 
 
 
-            //Add fields to database
-            students.firstName = studentFirstName;
-            students.lastName = studentLastName;
-            students.matricNum = studentMatriculation;
-            students.gradeOne = studentGrade1;
-            students.gradeTwo = studentGrade2;
-            students.gradeThree = studentGrade3;
-            students.gradeOverall = studentOverallGrade;
+                MessageBox.Show("Student Successfully Added!");
 
 
-            context.Students.Add(students);
-
-
-
-            //Refresh the displayed list
-            OnRefresh(sender, e);
-            context.SaveChanges();
-
-            MessageBox.Show("Student Successfully Added!");
+            }
         }
 
         //Editing Student Grades
@@ -137,6 +161,8 @@ namespace CM3036_CW_1504693
                 //update db with new details
                 context.SaveChanges();
 
+                MessageBox.Show("Student Updated");
+
                 //Refresh list on application
                 OnRefresh(sender, e);
             }
@@ -166,6 +192,8 @@ namespace CM3036_CW_1504693
         {
 
         }
+
+
 
     }
 }

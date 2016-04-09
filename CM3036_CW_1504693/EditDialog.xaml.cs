@@ -30,17 +30,9 @@ namespace CM3036_CW_1504693
             matriculation.Text = Matriculation;
 
             Trace.WriteLine(grade1);
-            //Grades 1-3
-            //Grade1.SelectedValue = grade1;
-            //Grade2.SelectedValue = grade2;
-            //Grade1.SelectedItem = grade1;
-            //Grade1.SelectedItem = grade1;
-            //Grade2.SelectedIndex = Grade2.Items.IndexOf(grade2);
-            //Grade3.SelectedIndex = Grade3.Items.IndexOf(grade3);
             checkGrade(grade1, Grade1);
             checkGrade(grade2, Grade2);
             checkGrade(grade3, Grade3);
-
         }
 
         public void checkGrade(string grade, ComboBox box)
@@ -75,8 +67,26 @@ namespace CM3036_CW_1504693
 
         private void onSubmit(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Close();
+            //Local Variables
+            Functions validation = new Functions();
+            string studentFirstName = firstName.Text;
+            string studentLastName = lastName.Text;
+            string studentMatriculation = matriculation.Text;
+
+            bool incomplete = false;
+            //Input validation
+            if (validation.isEmpty(studentFirstName) || validation.isEmpty(studentLastName) || validation.isEmpty(studentMatriculation))
+            {
+
+                MessageBox.Show("Fields incomplete, try again!");
+                incomplete = true;
+
+            }
+            else if (incomplete == false)
+            {
+                DialogResult = true;
+                Close();
+            }
         }
     }
 }
