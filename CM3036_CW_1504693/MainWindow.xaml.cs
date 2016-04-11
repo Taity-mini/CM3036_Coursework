@@ -31,7 +31,6 @@ namespace CM3036_CW_1504693
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -54,24 +53,24 @@ namespace CM3036_CW_1504693
             StudentsViewSource.Source = Students;
 
 
-            //Give each row a colour based on the student's overall change
-            foreach (Student item in studentDataGrid.ItemsSource)
-            {
-                var row = studentDataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+            ////Give each row a colour based on the student's overall change
+            //foreach (Student item in studentDataGrid.ItemsSource)
+            //{
+            //    var row = studentDataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
 
-                //If they fail give them red
-                if (item.gradeOverall == "F" || item.gradeOverall == "E")
-                {
-                   // row.Background =  new SolidColorBrush(Colors.Red);
+            //    //If they fail give them red
+            //    if (item.gradeOverall == "F" || item.gradeOverall == "E")
+            //    {
+            //       // row.Background =  new SolidColorBrush(Colors.Red);
                     
-                }
+            //    }
 
-                //Otherwise they passed and get green
-                else
-                {
-                    //row.Background =  FindResource("GreenBackgroundBrush") as Brush;
-                }
-            }
+            //    //Otherwise they passed and get green
+            //    else
+            //    {
+            //        //row.Background =  FindResource("GreenBackgroundBrush") as Brush;
+            //    }
+            //}
 
         }
 

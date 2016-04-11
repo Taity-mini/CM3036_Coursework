@@ -11,14 +11,17 @@ namespace CM3036_CW_1504693
 {
     class Functions
     {
-        //Form Validation
+        //Form Validation 
+        
+        //Checks for if a string is empty or contains only whitespace
         public Boolean isEmpty(string field)
         {
+            //Is field empty then true
             if (string.IsNullOrWhiteSpace(field) || field.Length == 0)
             {
                 return true;
             }
-
+            //Not empty? return false
             else
             {
                 return false;
@@ -124,7 +127,6 @@ namespace CM3036_CW_1504693
             //Calculate overall grade on each grade weighting
 
             //check if any grade F occur first
-
             if (gradeF)
             {
                 overallGrade = "F";
@@ -158,7 +160,6 @@ namespace CM3036_CW_1504693
                     overallGrade = "E";
                 }
             }
-
             return overallGrade;
         }
     }
