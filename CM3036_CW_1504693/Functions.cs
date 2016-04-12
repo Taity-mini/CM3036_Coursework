@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,17 +29,26 @@ namespace CM3036_CW_1504693
             }
         }
 
+        //Check if user exists in db based on matriculation Numbers
+
+        public Boolean userExists( DBStudent context,string matriculation)
+        {
+            var existingStudentCount = context.Students.Count(a => a.matricNum == matriculation);
+            if (existingStudentCount == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         //Main Grading Functions
         public string calculateGrade(string grade1, string grade2, string grade3)
         {
             //local variables
             string overallGrade = "";
-            int gradeA = 0;
-            int gradeB = 0;
-            int gradeC = 0;
-            int gradeD = 0;
-            int gradeE = 0;
-            int gradeF = 0;
 
             //component values
             int com1 = 0;
@@ -182,18 +192,15 @@ namespace CM3036_CW_1504693
 
             //Grade E
             //E = 1
-                     //Condition 1
+            //Condition 1
             else if ((com2 >= 1 && com3 >= 1) || (com2 >= 1 && com1 >= 1))
             {
                 overallGrade = "E";
             }
 
             //Grade F
-                     //Condition 1
-            else if ((com1 <= 1 && com2 <= 1) && (com3 <= 1))
-            {
-                overallGrade = "F";
-            }
+            //Condition 1
+           
             else
             {
                 overallGrade = "F";

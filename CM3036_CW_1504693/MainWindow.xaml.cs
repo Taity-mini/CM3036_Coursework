@@ -41,7 +41,7 @@ namespace CM3036_CW_1504693
 
             StudentsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("studentViewSource")));
             OnRefresh(sender, e);
-           
+
         }
 
         private void OnRefresh(object sender, RoutedEventArgs e)
@@ -62,7 +62,7 @@ namespace CM3036_CW_1504693
             //    if (item.gradeOverall == "F" || item.gradeOverall == "E")
             //    {
             //       // row.Background =  new SolidColorBrush(Colors.Red);
-                    
+
             //    }
 
             //    //Otherwise they passed and get green
@@ -103,32 +103,39 @@ namespace CM3036_CW_1504693
             }
             else if (incomplete == false)
             {
+                bool userExists = validation.userExists(context, studentMatriculation);
+                if (userExists)
+                {
+                    MessageBox.Show("User Already Exists, try a different Matriculation Number ");
+                }
+                else if (userExists == false)
+                {
+                    //Calculate Overall Grade
+                    string studentOverallGrade = validation.calculateGrade(studentGrade1, studentGrade2, studentGrade3);
 
-                //Calculate Overall Grade
-                string studentOverallGrade = validation.calculateGrade(studentGrade1, studentGrade2, studentGrade3);
+                    //Add fields to database
+                    students.firstName = studentFirstName;
+                    students.lastName = studentLastName;
+                    students.matricNum = studentMatriculation;
+                    students.gradeOne = studentGrade1;
+                    students.gradeTwo = studentGrade2;
+                    students.gradeThree = studentGrade3;
+                    students.gradeOverall = studentOverallGrade;
 
-                //Add fields to database
-                students.firstName = studentFirstName;
-                students.lastName = studentLastName;
-                students.matricNum = studentMatriculation;
-                students.gradeOne = studentGrade1;
-                students.gradeTwo = studentGrade2;
-                students.gradeThree = studentGrade3;
-                students.gradeOverall = studentOverallGrade;
+                    //Refresh the displayed list
+                    context.Students.Add(students);
+                    context.SaveChanges();
+                    OnRefresh(sender, e);
 
-                //Refresh the displayed list
-                context.Students.Add(students);
-                context.SaveChanges();
-                OnRefresh(sender, e);
-
-                //Clear fields to default
-                firstName.Clear();
-                lastName.Clear();
-                matriculationNo.Clear();
-                grade1.SelectedIndex = 0;
-                grade2.SelectedIndex = 0;
-                grade3.SelectedIndex = 0;
-                MessageBox.Show("Student Successfully Added!");
+                    //Clear fields to default
+                    firstName.Clear();
+                    lastName.Clear();
+                    matriculationNo.Clear();
+                    grade1.SelectedIndex = 0;
+                    grade2.SelectedIndex = 0;
+                    grade3.SelectedIndex = 0;
+                    MessageBox.Show("Student Successfully Added!");
+                }
 
             }
         }
@@ -140,7 +147,7 @@ namespace CM3036_CW_1504693
 
             Student student = (Student)button.DataContext;
 
-            EditDialog dialog = new EditDialog(student.firstName, student.lastName, student.matricNum, student.gradeOne, student.gradeTwo, student.gradeThree);
+            EditDialog dialog = new EditDialog(context,student.firstName, student.lastName, student.matricNum, student.gradeOne, student.gradeTwo, student.gradeThree);
             Functions grades = new Functions();
             Nullable<bool> result = dialog.ShowDialog();
             if (dialog.DialogResult == true)

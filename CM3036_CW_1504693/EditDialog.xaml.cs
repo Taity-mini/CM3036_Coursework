@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Diagnostics;
+using System.Runtime.Remoting.Contexts;
 
 
 namespace CM3036_CW_1504693
@@ -20,15 +21,16 @@ namespace CM3036_CW_1504693
     /// </summary>
     public partial class EditDialog : Window
     {
-        public EditDialog(string FirstName, string LastName, string Matriculation, string grade1, string grade2, string grade3)
+        private DBStudent context;
+        private string initalMatriculation;
+        public EditDialog(DBStudent context,string FirstName, string LastName, string Matriculation, string grade1, string grade2, string grade3)
         {
             InitializeComponent();
-
             //Set editing fields as current student details
             firstName.Text = FirstName;
             lastName.Text = LastName;
             matriculation.Text = Matriculation;
-
+            this.initalMatriculation = Matriculation;
             
             checkGrade(grade1, Grade1);
             checkGrade(grade2, Grade2);
@@ -69,6 +71,8 @@ namespace CM3036_CW_1504693
         {
             //Local Variables
             Functions validation = new Functions();
+            context = new DBStudent();
+          
             string studentFirstName = firstName.Text;
             string studentLastName = lastName.Text;
             string studentMatriculation = matriculation.Text;
@@ -82,8 +86,19 @@ namespace CM3036_CW_1504693
             }
             else if (incomplete == false)
             {
-                DialogResult = true;
-                Close();
+                bool MatriculationNoChange = studentMatriculation.Equals(this.initalMatriculation);
+                //check if the Matriculation has changed or not
+
+                bool userExists = validation.userExists(context, studentMatriculation);
+                if (userExists && !MatriculationNoChange)
+                {
+                    MessageBox.Show("User Already Exists, try a different Matriculation Number ");
+                }
+                else if (!userExists || MatriculationNoChange)
+                {
+                    DialogResult = true;
+                    Close();
+                }
             }
         }
     }
