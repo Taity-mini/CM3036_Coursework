@@ -182,12 +182,18 @@ namespace CM3036_CW_1504693
 
             //Grade E
             //E = 1
+                     //Condition 1
             else if ((com2 >= 1 && com3 >= 1) || (com2 >= 1 && com1 >= 1))
             {
                 overallGrade = "E";
             }
 
             //Grade F
+                     //Condition 1
+            else if ((com1 <= 1 && com2 <= 1) && (com3 <= 1))
+            {
+                overallGrade = "F";
+            }
             else
             {
                 overallGrade = "F";
