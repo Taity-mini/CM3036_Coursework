@@ -12,7 +12,7 @@ namespace CM3036_CW_1504693
     class Functions
     {
         //Form Validation 
-        
+
         //Checks for if a string is empty or contains only whitespace
         public Boolean isEmpty(string field)
         {
@@ -38,33 +38,45 @@ namespace CM3036_CW_1504693
             int gradeC = 0;
             int gradeD = 0;
             int gradeE = 0;
-            bool gradeF = false;
+            int gradeF = 0;
+
+            //component values
+            int com1 = 0;
+            int com2 = 0;
+            int com3 = 0;
+
+            //A = 5
+            //B = 4
+            //C = 3
+            //D = 2
+            //E = 1
+            //F = 0
 
             //Component one - Weighting x3
             switch (grade1)
             {
                 case "A":
-                    gradeA += 3;
+                    com1 = 5;
                     break;
 
                 case "B":
-                    gradeB += 3;
+                    com1 = 4;
                     break;
 
                 case "C":
-                    gradeC += 3;
+                    com1 = 3;
                     break;
 
                 case "D":
-                    gradeD += 3;
+                    com1 = 2;
                     break;
 
                 case "E":
-                    gradeE += 3;
+                    com1 = 1;
                     break;
 
                 case "F":
-                    gradeF = true;
+                    com1 = 0;
                     break;
             }
 
@@ -72,27 +84,27 @@ namespace CM3036_CW_1504693
             switch (grade2)
             {
                 case "A":
-                    gradeA += 5;
+                    com2 = 5;
                     break;
 
                 case "B":
-                    gradeB += 5;
+                    com2 = 4;
                     break;
 
                 case "C":
-                    gradeC += 5;
+                    com2 = 3;
                     break;
 
                 case "D":
-                    gradeD += 5;
+                    com2 = 2;
                     break;
 
                 case "E":
-                    gradeE += 5;
+                    com2 = 1;
                     break;
 
                 case "F":
-                    gradeF = true;
+                    com2 = 0;
                     break;
             }
 
@@ -100,66 +112,87 @@ namespace CM3036_CW_1504693
             switch (grade3)
             {
                 case "A":
-                    gradeA += 2;
+                    com3 = 5;
                     break;
 
                 case "B":
-                    gradeB += 2;
+                    com3 = 4;
                     break;
 
                 case "C":
-                    gradeC += 2;
+                    com3 = 3;
                     break;
 
                 case "D":
-                    gradeD += 2;
+                    com3 = 2;
                     break;
 
                 case "E":
-                    gradeE += 2;
+                    com3 = 1;
                     break;
 
                 case "F":
-                    gradeF = true;
+                    com3 = 0;
                     break;
             }
 
             //Calculate overall grade on each grade weighting
+            // Loop through Grade A to E 
+            //Grade A
+            //A = 5
+            //B = 4
+            //C = 3
 
-            //check if any grade F occur first
-            if (gradeF)
+            //Condition 1                                 //Condition 2                                         //Condition 3                                              
+            if ((com2 == 5 || (com1 == 5 && com3 == 5)) && ((com2 >= 4 && com3 >= 4) || (com2 >= 4 && com1 >= 4)) && ((com1 >= 3 && com2 >= 3) && (com3 >= 3)))
+            {
+                overallGrade = "A";
+            }
+            //Grade B
+
+            //B = 4
+            //C = 3
+            //D = 2
+
+                    //Condition 1                               //Condition 2                                              //Condition 3      
+            else if ((com2 == 4 || (com1 == 4 && com3 == 4)) && ((com2 >= 3 && com3 >= 3) || (com2 >= 3 && com1 >= 3)) && ((com1 >= 2 && com2 >= 2) && (com3 >= 2)))
+            {
+                overallGrade = "B";
+            }
+
+            //Grade C
+            //C = 3
+            //D = 2
+
+                    //Condition 1                                 //Condition 2                        
+            else if ((com2 == 3 || (com1 == 3 && com3 == 3)) && ((com2 >= 2 && com3 >= 2) || (com2 >= 2 && com1 >= 2)))
+            {
+                overallGrade = "C";
+            }
+
+             //Grade D
+            //D = 2
+            //E = 1
+
+                     //Condition 1                               //Condition 2 
+            else if ((com2 == 2 || (com1 == 2 && com3 == 2)) && ((com2 >= 1 && com3 >= 1) || (com2 >= 1 && com1 >= 1)))
+            {
+                overallGrade = "D";
+            }
+
+            //Grade E
+            //E = 1
+            else if ((com2 >= 1 && com3 >= 1) || (com2 >= 1 && com1 >= 1))
+            {
+                overallGrade = "E";
+            }
+
+            //Grade F
+            else
             {
                 overallGrade = "F";
             }
-            //Otherwise loop through Grade A to E
-            else if (!gradeF)
-            {
-                //Grade A
-                if (gradeA >= 5 || gradeB >= 7 || gradeC == 10)
-                {
-                    overallGrade = "A";
-                }
-                //Grade B
-                else if (gradeB >= 5 || gradeC >= 7 || gradeD == 10)
-                {
-                    overallGrade = "B";
-                }
-                //Grade C
-                else if (gradeC >= 5 || gradeD >= 7)
-                {
-                    overallGrade = "C";
-                }
-                // Grade D
-                else if (gradeD >= 5)
-                {
-                    overallGrade = "D";
-                }
-                //Grade E
-                else if (gradeE >= 7)
-                {
-                    overallGrade = "E";
-                }
-            }
+
             return overallGrade;
         }
     }
