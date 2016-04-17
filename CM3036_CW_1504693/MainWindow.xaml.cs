@@ -52,25 +52,8 @@ namespace CM3036_CW_1504693
             // connect list of Appointment entities to collection view
             StudentsViewSource.Source = Students;
 
-
-            ////Give each row a colour based on the student's overall change
-            //foreach (Student item in studentDataGrid.ItemsSource)
-            //{
-            //    var row = studentDataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-
-            //    //If they fail give them red
-            //    if (item.gradeOverall == "F" || item.gradeOverall == "E")
-            //    {
-            //       // row.Background =  new SolidColorBrush(Colors.Red);
-
-            //    }
-
-            //    //Otherwise they passed and get green
-            //    else
-            //    {
-            //        //row.Background =  FindResource("GreenBackgroundBrush") as Brush;
-            //    }
-            //}
+            //Calculate % of students that have passed
+            calculatePass();
 
         }
 
@@ -147,7 +130,7 @@ namespace CM3036_CW_1504693
 
             Student student = (Student)button.DataContext;
 
-            EditDialog dialog = new EditDialog(context,student.firstName, student.lastName, student.matricNum, student.gradeOne, student.gradeTwo, student.gradeThree);
+            EditDialog dialog = new EditDialog(context, student.firstName, student.lastName, student.matricNum, student.gradeOne, student.gradeTwo, student.gradeThree);
             Functions grades = new Functions();
             Nullable<bool> result = dialog.ShowDialog();
             if (dialog.DialogResult == true)
@@ -218,6 +201,33 @@ namespace CM3036_CW_1504693
             else //Otherwise display error message
             {
                 MessageBox.Show("Can't delete from an empty database!");
+            }
+        }
+
+        //Calculate students have passed and those have failed (E/F)
+        private void calculatePass()
+        {
+            double StudentPasses = 0;
+            double studentTotal = context.Students.Count(); // Total Number of Students
+            double finalPassRate;
+
+            //Loop through all students
+            foreach (Student student in context.Students)
+            {
+                if (student.gradeOverall != "E" && student.gradeOverall != "F")
+                {
+                    StudentPasses++;
+                }
+            }
+
+            if (studentTotal > 0)
+            {
+                finalPassRate = (StudentPasses / studentTotal) * 100;
+                passRate.Content = String.Format("{0:0.0#}", finalPassRate) + "%";
+            }
+            else
+            {
+                passRate.Content = 0.0 + "%";
             }
         }
 

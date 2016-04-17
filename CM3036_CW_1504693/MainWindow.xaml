@@ -94,7 +94,7 @@
         </DataGrid>
         <StatusBar HorizontalAlignment="Left" Height="40" Margin="0,468,0,0" VerticalAlignment="Top" Width="780">
             <Label Content="Percentage Pass:" Width="103" Height="28"/>
-            <Label x:Name="passRate" Content="PERCENTAGE"/>
         </StatusBar>
+        <Label x:Name="passRate" Content="%" RenderTransformOrigin="0.247,0.5" Margin="101,474,598,18"/>
     </Grid>
 </Window>
