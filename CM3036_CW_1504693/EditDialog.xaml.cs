@@ -41,28 +41,33 @@ namespace CM3036_CW_1504693
         {
             switch (grade)
             {
-                case "A":
+
+                case "":
                     box.SelectedIndex = 0;
                     break;
 
-                case "B":
+                case "A":
                     box.SelectedIndex = 1;
                     break;
 
-                case "C":
+                case "B":
                     box.SelectedIndex = 2;
                     break;
 
-                case "D":
+                case "C":
                     box.SelectedIndex = 3;
                     break;
 
-                case "E":
+                case "D":
                     box.SelectedIndex = 4;
                     break;
 
-                case "F":
+                case "E":
                     box.SelectedIndex = 5;
+                    break;
+
+                case "F":
+                    box.SelectedIndex = 6;
                     break;
             }
         }

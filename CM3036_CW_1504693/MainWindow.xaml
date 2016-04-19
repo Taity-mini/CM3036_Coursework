@@ -15,7 +15,8 @@
         <TextBox x:Name="lastName" HorizontalAlignment="Left" Height="23" Margin="151,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Component 1" HorizontalAlignment="Left" Margin="318,21,0,0" VerticalAlignment="Top" Width="92"/>
         <ComboBox x:Name="grade1" HorizontalAlignment="Left" Margin="446,25,0,0" VerticalAlignment="Top" Width="53" SelectedIndex="0">
-            <ComboBoxItem Content="A" ContentStringFormat="A"/>
+            <ComboBoxItem Content=" "/>
+            <ComboBoxItem Content="A"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
             <ComboBoxItem Content="D"/>
@@ -24,7 +25,8 @@
         </ComboBox>
         <Label Content="Component 2:" HorizontalAlignment="Left" Margin="318,66,0,0" VerticalAlignment="Top" Width="86" Height="26"/>
         <ComboBox x:Name="grade2" HorizontalAlignment="Left" Margin="446,66,0,0" VerticalAlignment="Top" Width="53" RenderTransformOrigin="0.125,0.545" SelectedIndex="0">
-            <ComboBoxItem  Content="A"/>
+            <ComboBoxItem Content=" "/>
+            <ComboBoxItem Content="A"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>
             <ComboBoxItem Content="D"/>
@@ -33,6 +35,7 @@
         </ComboBox>
         <Label Content="Component 3:" HorizontalAlignment="Left" Margin="318,107,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="grade3" HorizontalAlignment="Left" Margin="445,111,0,0" VerticalAlignment="Top" Width="54" SelectedIndex="0">
+            <ComboBoxItem Content=" "/>
             <ComboBoxItem Content="A"/>
             <ComboBoxItem Content="B"/>
             <ComboBoxItem Content="C"/>

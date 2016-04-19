@@ -78,14 +78,33 @@ namespace CM3036_CW_1504693
 
             Student students = new Student();
             bool incomplete = false;
-            //Input validation will go here..
+
+            //Input validation will go here:
+
+            //First check if all fields are not empty
             if (validation.isEmpty(studentFirstName) || validation.isEmpty(studentLastName) || validation.isEmpty(studentMatriculation))
             {
                 MessageBox.Show("Fields incomplete, try again!");
                 incomplete = true;
             }
+
+            //Then check if student names only contain letters/whitespace
+            if (!validation.onlyLetters(studentFirstName) && !validation.onlyLetters(studentLastName))
+            {
+                MessageBox.Show("Student Name Fields can only contain letters or whitespace");
+                incomplete = true;
+            }
+
+            //Lastly validate student matriculation number only contains numbers and is 6 numbers in length
+            if(!validation.validMatriculation(studentMatriculation))
+            {
+                MessageBox.Show("Student Matriculation can only be 7 numbers in length");
+                incomplete = true;
+            }
+
             else if (incomplete == false)
             {
+             
                 bool userExists = validation.userExists(context, studentMatriculation);
                 if (userExists)
                 {
@@ -219,13 +238,15 @@ namespace CM3036_CW_1504693
                     StudentPasses++;
                 }
             }
-
+            //Check if there any students
             if (studentTotal > 0)
-            {
+            {   
+                //calculate passRate with total # of passes with total # of students
                 finalPassRate = (StudentPasses / studentTotal) * 100;
+                //set pass rate to label
                 passRate.Content = String.Format("{0:0.0#}", finalPassRate) + "%";
             }
-            else
+            else // No students? Then display 0.0%
             {
                 passRate.Content = 0.0 + "%";
             }
