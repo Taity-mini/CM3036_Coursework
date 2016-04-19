@@ -95,7 +95,7 @@ namespace CM3036_CW_1504693
                 incomplete = true;
             }
 
-            //Lastly validate student matriculation number only contains numbers and is 6 numbers in length
+            //Lastly validate student matriculation number only contains numbers and is 7 numbers in length
             if(!validation.validMatriculation(studentMatriculation))
             {
                 MessageBox.Show("Student Matriculation can only be 7 numbers in length");
