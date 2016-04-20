@@ -90,15 +90,15 @@ namespace CM3036_CW_1504693
             string overallGrade = "";
 
             //First check for any non-submissions
-            bool nonSubmissions = false;
+            //bool nonSubmissions = false;
 
-            if (grade1 == " " || grade2 == " " || grade3 == " ")
-            {
-                nonSubmissions = true;
-                overallGrade = "F";
-            }
-            else if (!nonSubmissions)
-            {
+            //if (grade1 == " " || grade2 == " " || grade3 == " ")
+            //{
+            //    nonSubmissions = true;
+            //    overallGrade = "F";
+            //}
+            //else if (!nonSubmissions)
+            //{
                 //component values
                 int com1 = 0;
                 int com2 = 0;
@@ -136,6 +136,7 @@ namespace CM3036_CW_1504693
                         break;
 
                     case "F":
+                    case " ":
                         com1 = 0;
                         break;
                 }
@@ -164,6 +165,7 @@ namespace CM3036_CW_1504693
                         break;
 
                     case "F":
+                    case " ":
                         com2 = 0;
                         break;
                 }
@@ -192,6 +194,7 @@ namespace CM3036_CW_1504693
                         break;
 
                     case "F":
+                    case " ":
                         com3 = 0;
                         break;
                 }
@@ -257,7 +260,7 @@ namespace CM3036_CW_1504693
                 {
                     overallGrade = "F";
                 }
-            }
+           // }
             return overallGrade;
         }
     }
