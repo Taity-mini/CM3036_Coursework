@@ -87,13 +87,13 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="firstNameColumn1" Binding="{Binding firstName}" Header="First Name"   Width="1*"/>
-                    <DataGridTextColumn x:Name="lastNameColumn1" Binding="{Binding lastName}" Header="Last Name"  Width="1*"/>
-                    <DataGridTextColumn x:Name="gradeOneColumn1" Binding="{Binding gradeOne}" Header="Grade One" Width="1*"/>
-                    <DataGridTextColumn x:Name="gradeTwoColumn1" Binding="{Binding gradeTwo}" Header="Grade Two"  Width="1*"/>
-                    <DataGridTextColumn x:Name="gradeThreeColumn1" Binding="{Binding gradeThree}" Header="Grade Three" Width="1*"/>
-                    <DataGridTextColumn x:Name="gradeOverallColumn1" Binding="{Binding gradeOverall}" Header="Grade Overall" Width="1*"/>
-                    <DataGridTextColumn x:Name="matricNumColumn1" Binding="{Binding matricNum}" Header="Matriculation" Width="1*"/>
+                    <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding firstName}" Header="First Name"   Width="3*"/>
+                    <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding lastName}" Header="Last Name"  Width="3*"/>
+                    <DataGridTextColumn x:Name="gradeOneColumn" Binding="{Binding gradeOne}" Header="Grade One" Width="2*"/>
+                    <DataGridTextColumn x:Name="gradeTwoColumn" Binding="{Binding gradeTwo}" Header="Grade Two"  Width="2*"/>
+                    <DataGridTextColumn x:Name="gradeThreeColumn" Binding="{Binding gradeThree}" Header="Grade Three" Width="2*"/>
+                    <DataGridTextColumn x:Name="gradeOverallColumn" Binding="{Binding gradeOverall}" Header="Grade Overall" Width="2*"/>
+                    <DataGridTextColumn x:Name="matricNumColumn" Binding="{Binding matricNum}" Header="Matriculation" Width="3*"/>
                     <DataGridTemplateColumn Header="Edit" Width="80">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
