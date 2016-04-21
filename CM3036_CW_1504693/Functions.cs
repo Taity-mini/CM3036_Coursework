@@ -89,178 +89,150 @@ namespace CM3036_CW_1504693
             //local variables
             string overallGrade = "";
 
-            //First check for any non-submissions
-            //bool nonSubmissions = false;
+            //Grade counters
+            int gradeA = 0;
+            int gradeB = 0;
+            int gradeC = 0;
+            int gradeD = 0;
+            int gradeE = 0;
 
-            //if (grade1 == " " || grade2 == " " || grade3 == " ")
-            //{
-            //    nonSubmissions = true;
-            //    overallGrade = "F";
-            //}
-            //else if (!nonSubmissions)
-            //{
-                //component values
-                int com1 = 0;
-                int com2 = 0;
-                int com3 = 0;
+            //Component one - Weighting x3
+            switch (grade1)
+            {
+                case "A":
+                    gradeA += 3;
+                    gradeB += 3;
+                    gradeC += 3;
+                    gradeD += 3;
+                    gradeE += 3;
+                    break;
 
-                //A = 5
-                //B = 4
-                //C = 3
-                //D = 2
-                //E = 1
-                //F = 0
+                case "B":
+                    gradeB += 3;
+                    gradeC += 3;
+                    gradeD += 3;
+                    gradeE += 3;
+                    break;
 
+                case "C":
+                    gradeC += 3;
+                    gradeD += 3;
+                    gradeE += 3;
+                    break;
 
-                //Component one - Weighting x3
-                switch (grade1)
-                {
-                    case "A":
-                        com1 = 5;
-                        break;
+                case "D":
+                    gradeD += 3;
+                    gradeE += 3;
+                    break;
 
-                    case "B":
-                        com1 = 4;
-                        break;
+                case "E":
+                    gradeE += 3;
+                    break;
 
-                    case "C":
-                        com1 = 3;
-                        break;
+            }
 
-                    case "D":
-                        com1 = 2;
-                        break;
+            //Component two - Weighting x5
+            switch (grade2)
+            {
+                case "A":
+                    gradeA += 5;
+                    gradeB += 5;
+                    gradeC += 5;
+                    gradeD += 5;
+                    gradeE += 5;
+                    break;
 
-                    case "E":
-                        com1 = 1;
-                        break;
+                case "B":
+                    gradeB += 5;
+                    gradeC += 5;
+                    gradeD += 5;
+                    gradeE += 5;
+                    break;
 
-                    case "F":
-                    case " ":
-                        com1 = 0;
-                        break;
-                }
+                case "C":
+                    gradeC += 5;
+                    gradeD += 5;
+                    gradeE += 5;
+                    break;
 
-                //Component two - Weighting x5
-                switch (grade2)
-                {
-                    case "A":
-                        com2 = 5;
-                        break;
+                case "D":
+                    gradeD += 5;
+                    gradeE += 5;
+                    break;
 
-                    case "B":
-                        com2 = 4;
-                        break;
+                case "E":
+                    gradeE += 5;
+                    break;
+            }
 
-                    case "C":
-                        com2 = 3;
-                        break;
+            //Component three - Weighting x2
+            switch (grade3)
+            {
+                case "A":
+                    gradeA += 2;
+                    gradeB += 2;
+                    gradeC += 2;
+                    gradeD += 2;
+                    gradeE += 2;
+                    break;
 
-                    case "D":
-                        com2 = 2;
-                        break;
+                case "B":
+                    gradeB += 2;
+                    gradeC += 2;
+                    gradeD += 2;
+                    gradeE += 2;
+                    break;
 
-                    case "E":
-                        com2 = 1;
-                        break;
+                case "C":
+                    gradeC += 2;
+                    gradeD += 2;
+                    gradeE += 2;
+                    break;
 
-                    case "F":
-                    case " ":
-                        com2 = 0;
-                        break;
-                }
+                case "D":
+                    gradeD += 2;
+                    gradeE += 2;
+                    break;
 
-                //Component three - Weighting x2
-                switch (grade3)
-                {
-                    case "A":
-                        com3 = 5;
-                        break;
+                case "E":
+                    gradeE += 2;
+                    break;
 
-                    case "B":
-                        com3 = 4;
-                        break;
-
-                    case "C":
-                        com3 = 3;
-                        break;
-
-                    case "D":
-                        com3 = 2;
-                        break;
-
-                    case "E":
-                        com3 = 1;
-                        break;
-
-                    case "F":
-                    case " ":
-                        com3 = 0;
-                        break;
-                }
-
-
-                //Calculate overall grade on each grade weighting
-                // Loop through Grade A to E 
-                //Grade A
-                //A = 5
-                //B = 4
-                //C = 3
+            }
 
 
-                //Condition 1                                 //Condition 2                                         //Condition 3                                              
-                if ((com2 == 5 || (com1 == 5 && com3 == 5)) && ((com2 >= 4 && com3 >= 4) || (com2 >= 4 && com1 >= 4)) && ((com1 >= 3 && com2 >= 3) && (com3 >= 3)))
-                {
-                    overallGrade = "A";
-                }
-                //Grade B
+            //Calculate overall grade on each grade weighting
+            //Loop through Grade A to F
 
-                //B = 4
-                //C = 3
-                //D = 2
-
-                        //Condition 1                               //Condition 2                                              //Condition 3      
-                else if ((com2 == 4 || (com1 == 4 && com3 == 4)) && ((com2 >= 3 && com3 >= 3) || (com2 >= 3 && com1 >= 3)) && ((com1 >= 2 && com2 >= 2) && (com3 >= 2)))
-                {
-                    overallGrade = "B";
-                }
-
-                //Grade C
-                //C = 3
-                //D = 2
-
-                        //Condition 1                                 //Condition 2                        
-                else if ((com2 == 3 || (com1 == 3 && com3 == 3)) && ((com2 >= 2 && com3 >= 2) || (com2 >= 2 && com1 >= 2)))
-                {
-                    overallGrade = "C";
-                }
-
-                 //Grade D
-                //D = 2
-                //E = 1
-
-                         //Condition 1                               //Condition 2 
-                else if ((com2 == 2 || (com1 == 2 && com3 == 2)) && ((com2 >= 1 && com3 >= 1) || (com2 >= 1 && com1 >= 1)))
-                {
-                    overallGrade = "D";
-                }
-
-                //Grade E
-                //E = 1
-                //Condition 1
-                else if ((com2 >= 1 && com3 >= 1) || (com2 >= 1 && com1 >= 1))
-                {
-                    overallGrade = "E";
-                }
-
-                //Grade F
-                //Condition 1
-
-                else
-                {
-                    overallGrade = "F";
-                }
-           // }
+            //Grade A
+            if (gradeA >= 5 && gradeB >= 7 && gradeC == 10)
+            {
+                overallGrade = "A";
+            }
+            //Grade B
+            else if (gradeB >= 5 && gradeC >= 7 && gradeD == 10)
+            {
+                overallGrade = "B";
+            }
+            //Grade C
+            else if (gradeC >= 5 && gradeD >= 7)
+            {
+                overallGrade = "C";
+            }
+            // Grade D
+            else if (gradeD >= 5 && gradeE >= 7)
+            {
+                overallGrade = "D";
+            }
+            //Grade E
+            else if (gradeE >= 7)
+            {
+                overallGrade = "E";
+            }
+            else
+            {
+                overallGrade = "F";
+            }
             return overallGrade;
         }
     }
