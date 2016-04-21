@@ -58,6 +58,7 @@ namespace CM3036_CW_1504693
         }
 
 
+
         //Adding a student's grades to the database
         private void onAddStudent(object sender, RoutedEventArgs e)
         {
@@ -80,7 +81,6 @@ namespace CM3036_CW_1504693
             bool incomplete = false;
 
             //Input validation will go here:
-
             //First check if all fields are not empty
             if (validation.isEmpty(studentFirstName) || validation.isEmpty(studentLastName) || validation.isEmpty(studentMatriculation))
             {
@@ -96,7 +96,7 @@ namespace CM3036_CW_1504693
             }
 
             //Lastly validate student matriculation number only contains numbers and is 7 numbers in length
-            if(!validation.validMatriculation(studentMatriculation))
+            if (!validation.validMatriculation(studentMatriculation))
             {
                 MessageBox.Show("Student Matriculation can only be 7 numbers in length");
                 incomplete = true;
@@ -104,7 +104,7 @@ namespace CM3036_CW_1504693
 
             else if (incomplete == false)
             {
-             
+
                 bool userExists = validation.userExists(context, studentMatriculation);
                 if (userExists)
                 {
@@ -240,7 +240,7 @@ namespace CM3036_CW_1504693
             }
             //Check if there any students
             if (studentTotal > 0)
-            {   
+            {
                 //calculate passRate with total # of passes with total # of students
                 finalPassRate = (StudentPasses / studentTotal) * 100;
                 //set pass rate to label

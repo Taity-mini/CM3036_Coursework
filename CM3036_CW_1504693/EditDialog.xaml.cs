@@ -89,6 +89,20 @@ namespace CM3036_CW_1504693
                 MessageBox.Show("Fields incomplete, try again!");
                 incomplete = true;
             }
+
+            //Then check if student names only contain letters/whitespace
+            if (!validation.onlyLetters(studentFirstName) && !validation.onlyLetters(studentLastName))
+            {
+                MessageBox.Show("Student Name Fields can only contain letters or whitespace");
+                incomplete = true;
+            }
+
+            //Lastly validate student matriculation number only contains numbers and is 7 numbers in length
+            if (!validation.validMatriculation(studentMatriculation))
+            {
+                MessageBox.Show("Student Matriculation can only be 7 numbers in length");
+                incomplete = true;
+            }
             else if (incomplete == false)
             {
                 bool MatriculationNoChange = studentMatriculation.Equals(this.initalMatriculation);
