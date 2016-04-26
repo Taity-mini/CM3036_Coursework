@@ -18,11 +18,16 @@ namespace CM3036_CW_1504693
 {
     /// <summary>
     /// Interaction logic for EditDialog.xaml
+    /// Editing Individual Students Window Form
+    /// Coursework for CM3036 | Programming in C#
+    /// Author: Andrew Tait (1504693)
     /// </summary>
+    /// 
     public partial class EditDialog : Window
     {
         private DBStudent context;
         private string initalMatriculation;
+     
         public EditDialog(DBStudent context,string FirstName, string LastName, string Matriculation, string grade1, string grade2, string grade3)
         {
             InitializeComponent();
@@ -32,16 +37,18 @@ namespace CM3036_CW_1504693
             matriculation.Text = Matriculation;
             this.initalMatriculation = Matriculation;
             
+            //Set combobox to correct grade
             checkGrade(grade1, Grade1);
             checkGrade(grade2, Grade2);
             checkGrade(grade3, Grade3);
         }
-
+        
+        //Check grade string and set combobox selected index accordingly
         public void checkGrade(string grade, ComboBox box)
         {
             switch (grade)
             {
-
+                //Non submission
                 case "":
                     box.SelectedIndex = 0;
                     break;

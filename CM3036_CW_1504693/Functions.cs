@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
 
-//Functions class for various functions within the program
+/// <summary>
+/// Functions class for various functions used throughout the program
+/// Coursework for CM3036 | Programming in C#
+/// Author: Andrew Tait (1504693)
+/// </summary>
+/// 
 
 namespace CM3036_CW_1504693
 {
@@ -82,7 +87,6 @@ namespace CM3036_CW_1504693
         }
 
 
-
         //Main Grading Functions
         public string calculateGrade(string grade1, string grade2, string grade3)
         {
@@ -99,14 +103,15 @@ namespace CM3036_CW_1504693
             //First check for any non-submissions
             bool nonSubmissions = false;
 
+
             if (grade1 == " " || grade2 == " " || grade3 == " ")
             {
+                //Auto grade 'F' for any non Submission
                 nonSubmissions = true;
                 overallGrade = "F";
             }
             else if (!nonSubmissions)
             {
-
                 //Component one - Weighting x3
                 switch (grade1)
                 {
@@ -214,8 +219,6 @@ namespace CM3036_CW_1504693
 
                 //Calculate overall grade on each grade weighting
                 //Loop through Grade A to F
-
-
 
                 //Grade A
                 if (gradeA >= 5 && gradeB >= 7 && gradeC == 10)

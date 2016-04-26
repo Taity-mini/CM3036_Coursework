@@ -41,7 +41,6 @@ namespace CM3036_CW_1504693
 
             StudentsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("studentViewSource")));
             OnRefresh(sender, e);
-
         }
 
         private void OnRefresh(object sender, RoutedEventArgs e)
@@ -54,7 +53,6 @@ namespace CM3036_CW_1504693
 
             //Calculate % of students that have passed
             calculatePass();
-
         }
 
 
@@ -62,7 +60,6 @@ namespace CM3036_CW_1504693
         //Adding a student's grades to the database
         private void onAddStudent(object sender, RoutedEventArgs e)
         {
-
             //Field variables
             string studentFirstName = firstName.Text;
             string studentLastName = lastName.Text;
@@ -104,12 +101,14 @@ namespace CM3036_CW_1504693
 
             else if (incomplete == false)
             {
-
+                //Check if student exists based on their studentMatriculation number
                 bool userExists = validation.userExists(context, studentMatriculation);
-                if (userExists)
+                
+                if (userExists) //Display Message
                 {
                     MessageBox.Show("User Already Exists, try a different Matriculation Number ");
                 }
+                //Otherwise add new student
                 else if (userExists == false)
                 {
                     //Calculate Overall Grade
@@ -161,6 +160,8 @@ namespace CM3036_CW_1504693
                 string grade1 = dialog.Grade1.SelectionBoxItem.ToString();
                 string grade2 = dialog.Grade2.SelectionBoxItem.ToString();
                 string grade3 = dialog.Grade3.SelectionBoxItem.ToString();
+
+                //ReCalculate Overall Grade
                 string studentOverallGrade = grades.calculateGrade(grade1, grade2, grade3);
 
                 //set updated fields into student record
@@ -189,10 +190,10 @@ namespace CM3036_CW_1504693
             Button button = sender as Button;
 
             Student student = (Student)button.DataContext;
-
+            //Ask user if they want to delete student
             var result = MessageBox.Show("Delete Student: " + student.matricNum + "?", "Confirmation",
                 MessageBoxButton.YesNo);
-
+            //If yes then delete student and refresh datagrid
             if (result == MessageBoxResult.Yes)
             {
                 context.Students.Remove(student);
@@ -208,25 +209,26 @@ namespace CM3036_CW_1504693
             //Check if database is not empty
             if (Students.Count > 0)
             {
+                //Ask user if they want to Delete all students
                 var result = MessageBox.Show("Delete all students (irreversible)?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    //Delete all Students
+                    //Delete all Students with TRUNCATE SQL command
                     context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Students]");
                     context.SaveChanges();
-                    OnRefresh(sender, e);
+                    OnRefresh(sender, e); //Refresh datagrid
                 }
             }
-            else //Otherwise display error message
+            else //Otherwise display error message if database is empty
             {
                 MessageBox.Show("Can't delete from an empty database!");
             }
         }
 
-        //Calculate students have passed and those have failed (E/F)
+        //Calculate total percentage of whom students have passed
         private void calculatePass()
         {
-            double StudentPasses = 0;
+            double StudentPasses = 0; //student pass counter
             double studentTotal = context.Students.Count(); // Total Number of Students
             double finalPassRate;
 
@@ -244,7 +246,7 @@ namespace CM3036_CW_1504693
                 //calculate passRate with total # of passes with total # of students
                 finalPassRate = (StudentPasses / studentTotal) * 100;
                 //set pass rate to label
-                passRate.Content = String.Format("{0:0.0#}", finalPassRate) + "%";
+                passRate.Content = String.Format("{0:0.0#}", finalPassRate) + "%"; //Format string to 0.0.0%
             }
             else // No students? Then display 0.0%
             {

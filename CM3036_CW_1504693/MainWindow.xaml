@@ -6,8 +6,9 @@
     <Window.Resources>
         <CollectionViewSource x:Key="studentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Student}, CreateList=True}"/>
     </Window.Resources>
-
     <DockPanel>
+
+        <!-- Add/Delete ALL Students Form (Top of Window) START -->
         <Grid DockPanel.Dock="Top"  Height="170" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="86,0">
             <Label Content="First Name:" HorizontalAlignment="Left" Margin="7,25,0,0" VerticalAlignment="Top" Width="92" Grid.Column="1"/>
             <TextBox x:Name="firstName" HorizontalAlignment="Left" Height="23" Margin="146,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -47,10 +48,11 @@
             <TextBox x:Name="matriculationNo" HorizontalAlignment="Left" Height="23" Margin="146,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="116,270,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
             <Button x:Name="addStudent" Content="Add Student" HorizontalAlignment="Left" Margin="534,25,0,0" VerticalAlignment="Top" Width="141" RenderTransformOrigin="-0.933,0.227" Click="onAddStudent" Grid.Column="1"/>
-            <Button x:Name="RefreshList" Content="Refresh List" HorizontalAlignment="Left" Margin="534,112,0,0" VerticalAlignment="Top" Width="141" Click="OnRefresh" Grid.Column="1"/>
-            <Button x:Name="deleteAllStudents" Content="Delete All Students" HorizontalAlignment="Left" Margin="534,72,0,0" VerticalAlignment="Top" Width="141" Click="onDeleteAllStudents" Grid.Column="1"/>
+            <Button x:Name="deleteAllStudents" Content="Delete All Students" HorizontalAlignment="Left" Margin="533,68,0,0" VerticalAlignment="Top" Width="141" Click="onDeleteAllStudents"/>
         </Grid>
-        <!-- Status Bar START Percentage of students who passed-->
+        <!-- Add/Delete ALL Students Form (Top of Window) END -->
+        
+        <!-- Status Bar START Percentage of students who passed START-->
         <Grid DockPanel.Dock="Bottom" Margin="0"  Height="40" VerticalAlignment="Bottom">
             <StatusBar Height="40" RenderTransformOrigin="0.5,0.5">
                 <StatusBarItem DockPanel.Dock="Left">
@@ -61,7 +63,9 @@
                 </StatusBarItem>
             </StatusBar>
         </Grid>
-        <!--Main Student Data Grid (Middle of Window)-->
+        <!-- Status Bar START Percentage of students who passed END-->
+        
+        <!--Main Student Data Grid (Middle of Window) START-->
         <Grid DockPanel.Dock="Top" DataContext="{StaticResource studentViewSource}" MinHeight="100" VerticalAlignment="Stretch">
             <DataGrid x:Name="studentDataGrid" IsSynchronizedWithCurrentItem="false"  CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Background="{x:Null}" OpacityMask="#FFE24343">
                 <DataGrid.Resources>
@@ -111,5 +115,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <!--Main Student Data Grid (Middle of Window) END-->
     </DockPanel>
 </Window>
