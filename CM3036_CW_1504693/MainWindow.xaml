@@ -52,18 +52,36 @@
         </Grid>
         <!-- Add/Delete ALL Students Form (Top of Window) END -->
         
-        <!-- Status Bar START Percentage of students who passed START-->
+        <!-- Status Bar START Percentage of students who passed/failed START-->
         <Grid DockPanel.Dock="Bottom" Margin="0"  Height="40" VerticalAlignment="Bottom">
             <StatusBar Height="40" RenderTransformOrigin="0.5,0.5">
+                <!--Percentage PASS-->
                 <StatusBarItem DockPanel.Dock="Left">
                     <Label Content="Percentage Pass:" Width="103" Height="28"/>
                 </StatusBarItem>
-                <StatusBarItem Margin="0,0,0,4" DockPanel.Dock="Left">
-                    <Label x:Name="passRate" Content="%"/>
+                <StatusBarItem  DockPanel.Dock="Left" Width="80">
+                    <Label x:Name="passRate" Content="%" />
                 </StatusBarItem>
+                <!--Percentage PASS-->
+
+                <!--Percentage FAIL-->
+                <StatusBarItem DockPanel.Dock="left" Width="101">
+                    <Label Content="Percentage Fail:"/>
+                </StatusBarItem>
+                <StatusBarItem  DockPanel.Dock="left" Width="96">
+                    <Label x:Name="failRate" Content="%" />
+                </StatusBarItem>
+                <!--Percentage FAIL-->
+                
+                <!--Empty space-->
+                <StatusBarItem  DockPanel.Dock="right" Width="512">
+                    <Label  Content=" " />
+                </StatusBarItem>
+             
+                
             </StatusBar>
         </Grid>
-        <!-- Status Bar START Percentage of students who passed END-->
+        <!-- Status Bar START Percentage of students who passed/failed END-->
         
         <!--Main Student Data Grid (Middle of Window) START-->
         <Grid DockPanel.Dock="Top" DataContext="{StaticResource studentViewSource}" MinHeight="100" VerticalAlignment="Stretch">

@@ -231,7 +231,7 @@ namespace CM3036_CW_1504693
             double StudentPasses = 0; //student pass counter
             double studentTotal = context.Students.Count(); // Total Number of Students
             double finalPassRate;
-
+            double finalFailRate;
             //Loop through all students
             foreach (Student student in context.Students)
             {
@@ -246,11 +246,14 @@ namespace CM3036_CW_1504693
                 //calculate passRate with total # of passes with total # of students
                 finalPassRate = (StudentPasses / studentTotal) * 100;
                 //set pass rate to label
-                passRate.Content = String.Format("{0:0.0#}", finalPassRate) + "%"; //Format string to 0.0.0%
+                passRate.Content = String.Format("{0:0.0#}", finalPassRate) + "%"; //Format string to 00.0%
+                finalFailRate = 100.0 - finalPassRate;
+                failRate.Content =String.Format("{0:0.0#}", finalFailRate) + "%"; //Format string to 00.0%
             }
             else // No students? Then display 0.0%
             {
                 passRate.Content = 0.0 + "%";
+                failRate.Content = 0.0 + "%";
             }
         }
 
