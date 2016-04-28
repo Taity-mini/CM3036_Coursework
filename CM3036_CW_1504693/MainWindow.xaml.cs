@@ -53,6 +53,10 @@ namespace CM3036_CW_1504693
 
             //Calculate % of students that have passed
             calculatePass();
+
+            //Display/update total number of student
+            int count = context.Students.Count();
+            studentCount.Content = count;
         }
 
 

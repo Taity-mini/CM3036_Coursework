@@ -59,7 +59,7 @@
                 <StatusBarItem DockPanel.Dock="Left">
                     <Label Content="Percentage Pass:" Width="103" Height="28"/>
                 </StatusBarItem>
-                <StatusBarItem  DockPanel.Dock="Left" Width="80">
+                <StatusBarItem  DockPanel.Dock="Left" Width="66">
                     <Label x:Name="passRate" Content="%" />
                 </StatusBarItem>
                 <!--Percentage PASS-->
@@ -68,14 +68,23 @@
                 <StatusBarItem DockPanel.Dock="left" Width="101">
                     <Label Content="Percentage Fail:"/>
                 </StatusBarItem>
-                <StatusBarItem  DockPanel.Dock="left" Width="96">
+                <StatusBarItem  DockPanel.Dock="left" Width="65">
                     <Label x:Name="failRate" Content="%" />
                 </StatusBarItem>
                 <!--Percentage FAIL-->
                 
-                <!--Empty space-->
-                <StatusBarItem  DockPanel.Dock="right" Width="512">
-                    <Label  Content=" " />
+                <!--Total Number of Students-->
+                <StatusBarItem DockPanel.Dock="left" Width="164">
+                    <Label Content="Total Number of Students:"/>
+                </StatusBarItem>
+                <StatusBarItem  DockPanel.Dock="left" Width="60">
+                    <Label x:Name="studentCount" Content="#" />
+                </StatusBarItem>
+                
+                
+                <!--Credits-->
+                <StatusBarItem  DockPanel.Dock="left"  HorizontalAlignment="Stretch" >
+                    <Label  Content="By Andrew Tait (1504693)" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
                 </StatusBarItem>
              
                 
