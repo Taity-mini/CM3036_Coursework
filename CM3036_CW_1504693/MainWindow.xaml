@@ -60,7 +60,7 @@
                     <Label Content="Percentage Pass:" Width="103" Height="28"/>
                 </StatusBarItem>
                 <StatusBarItem  DockPanel.Dock="Left" Width="66">
-                    <Label x:Name="passRate" Content="%" />
+                    <Label x:Name="passRate" Content="%" FontWeight="Bold" />
                 </StatusBarItem>
                 <!--Percentage PASS-->
 
@@ -69,7 +69,7 @@
                     <Label Content="Percentage Fail:"/>
                 </StatusBarItem>
                 <StatusBarItem  DockPanel.Dock="left" Width="65">
-                    <Label x:Name="failRate" Content="%" />
+                    <Label x:Name="failRate" Content="%" FontWeight="Bold" />
                 </StatusBarItem>
                 <!--Percentage FAIL-->
                 
@@ -78,16 +78,14 @@
                     <Label Content="Total Number of Students:"/>
                 </StatusBarItem>
                 <StatusBarItem  DockPanel.Dock="left" Width="60">
-                    <Label x:Name="studentCount" Content="#" />
+                    <Label x:Name="studentCount" Content="#" FontWeight="Bold" />
                 </StatusBarItem>
                 
                 
                 <!--Credits-->
                 <StatusBarItem  DockPanel.Dock="left"  HorizontalAlignment="Stretch" >
-                    <Label  Content="By Andrew Tait (1504693)" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                    <Label  Content="By Andrew Tait (1504693)" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" FontStyle="Italic"/>
                 </StatusBarItem>
-             
-                
             </StatusBar>
         </Grid>
         <!-- Status Bar START Percentage of students who passed/failed END-->
@@ -106,8 +104,11 @@
                             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
                             <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black" />
                         </Style.Resources>
+                   
+
                         <Setter Property="Background" Value="Green"/>
                         <Style.Triggers>
+
                             <DataTrigger Binding="{Binding gradeOverall}" Value="F">
                                 <Setter Property="Background" Value="Red"/>
                             </DataTrigger>
